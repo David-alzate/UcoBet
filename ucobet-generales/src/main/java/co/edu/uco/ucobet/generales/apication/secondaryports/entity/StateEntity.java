@@ -8,12 +8,13 @@ import co.edu.uco.ucobet.generales.crosscutting.helpers.UUIDHelper;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "City")
-public final class CityEntity {
+@Table(name = "State")
+public final class StateEntity {
 
 	@Id
 	@Column(name = "id")
@@ -23,31 +24,31 @@ public final class CityEntity {
 	private String name;
 
 	@ManyToOne
-	@Column(name = "state")
-	private StateEntity state;
+	@JoinColumn(name = "country")
+	private CountryEntity country;
 
-	CityEntity() {
+	StateEntity() {
 		setId(UUIDHelper.getDefault());
 		setName(TextHelper.EMPTY);
-		setState(StateEntity.create());
+		setCountry(CountryEntity.create());
 	}
 
-	public CityEntity(final UUID id, final String name, final StateEntity state) {
+	public StateEntity(final UUID id, final String name, final CountryEntity country) {
 		setId(id);
 		setName(name);
-		setState(state);
+		setCountry(country);
 	}
 
-	static final CityEntity create() {
-		return new CityEntity();
+	static final StateEntity create() {
+		return new StateEntity();
 	}
 
-	public static final CityEntity create(final UUID id, final String name, final StateEntity state) {
-		return new CityEntity(id, name, state);
+	public static final StateEntity create(final UUID id, final String name, final CountryEntity country) {
+		return new StateEntity(id, name, country);
 	}
 
-	public static final CityEntity create(final UUID id) {
-		return new CityEntity(id, TextHelper.EMPTY, StateEntity.create());
+	public static final StateEntity create(final UUID id) {
+		return new StateEntity(id, TextHelper.EMPTY, CountryEntity.create());
 	}
 
 	public UUID getId() {
@@ -55,7 +56,7 @@ public final class CityEntity {
 	}
 
 	public void setId(final UUID id) {
-		this.id = UUIDHelper.getDefault();
+		this.id = UUIDHelper.getDefault(id, UUIDHelper.getDefault());
 	}
 
 	public String getName() {
@@ -66,12 +67,12 @@ public final class CityEntity {
 		this.name = TextHelper.applyTrim(name);
 	}
 
-	public StateEntity getState() {
-		return state;
+	public CountryEntity getCountry() {
+		return country;
 	}
 
-	public void setState(final StateEntity state) {
-		this.state = ObjectHelper.getDefault(state, StateEntity.create());
+	public void setCountry(final CountryEntity country) {
+		this.country = ObjectHelper.getDefault(country, CountryEntity.create());
 	}
 
 }
