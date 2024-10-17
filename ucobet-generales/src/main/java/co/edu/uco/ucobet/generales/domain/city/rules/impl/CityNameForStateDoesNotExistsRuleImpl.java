@@ -15,6 +15,7 @@ public class CityNameForStateDoesNotExistsRuleImpl implements CityNameForStateDo
 	@Override
 	public void validate(CityDomain data) {
 		
+
 		
 	}
 

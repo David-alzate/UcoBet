@@ -4,6 +4,6 @@ import java.util.UUID;
 
 import co.edu.uco.ucobet.generales.domain.DomainRule;
 
-public interface CityIsNotUsedRule extends DomainRule<UUID>{
+public interface CityIsNotBeingUsedRule extends DomainRule<UUID>{
 
 }

@@ -2,18 +2,18 @@ package co.edu.uco.ucobet.generales.domain.city.exceptions;
 
 import co.edu.uco.ucobet.generales.crosscutting.exception.RuleUcobetException;
 
-public class CityIdDoesNotExistsExcption extends RuleUcobetException{
+public class CityIdDoesNotExistsException extends RuleUcobetException{
 
 	private static final long serialVersionUID = 1L;
 	
-	public CityIdDoesNotExistsExcption(final String userMessage) {
+	private CityIdDoesNotExistsException(final String userMessage) {
 		super(userMessage, userMessage, new Exception());
 		
 	}
 	
-	public static final CityIdDoesNotExistsExcption create() {
+	public static final CityIdDoesNotExistsException create() {
 		var userMessage = "No existe la ciudad con el id indicado";
-		return new CityIdDoesNotExistsExcption(userMessage);
+		return new CityIdDoesNotExistsException(userMessage);
 	}
 
 }
