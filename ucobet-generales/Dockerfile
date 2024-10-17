@@ -2,7 +2,7 @@ FROM openjdk:23-jdk-slim
 
 # Instalar utilidades necesarias para crear usuarios
 RUN apt-get update && apt-get install -y \
-    sudo \
+    sudo curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Crear un grupo y un usuario no privilegiado
@@ -24,3 +24,5 @@ USER appuser
 
 # Comando para ejecutar tu aplicación
 ENTRYPOINT ["java", "-jar", "/app.jar"]
+
+

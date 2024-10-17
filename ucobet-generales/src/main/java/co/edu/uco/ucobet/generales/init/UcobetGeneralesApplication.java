@@ -1,7 +1,6 @@
 package co.edu.uco.ucobet.generales.init;
 
 import com.azure.security.keyvault.secrets.SecretClient;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,9 +12,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class UcobetGeneralesApplication implements CommandLineRunner {
 
     private final SecretClient secretClient;
-
-    @Value("${spring.datasource.url}")
-    private String dataSourceUrl;
 
     public UcobetGeneralesApplication(SecretClient secretClient) {
         this.secretClient = secretClient;

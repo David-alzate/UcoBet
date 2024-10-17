@@ -2,12 +2,14 @@ package co.edu.uco.ucobet.generales.infrastructure.primaryadapters.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.azure.security.keyvault.secrets.SecretClient;
 import com.azure.security.keyvault.secrets.models.KeyVaultSecret;
 
 @RestController
+@RequestMapping("/api/generales")
 public class VaultController {
 	private final SecretClient secretClient;
 
