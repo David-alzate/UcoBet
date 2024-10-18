@@ -5,8 +5,8 @@ import co.edu.uco.ucobet.generales.domain.city.rules.CityNameLenghIsValidRule;
 
 public class CityNameLenghIsValidRuleImpl implements CityNameLenghIsValidRule {
 
-	private static final int MIN_NAME_LENGTH = 5;
-	private static final int MAX_NAME_LENGTH = 40;
+	private static final int MIN_NAME_LENGTH = 3;
+	private static final int MAX_NAME_LENGTH = 255;
 
 	@Override
 	public void validate(String data) {
