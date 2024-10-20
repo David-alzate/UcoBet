@@ -15,7 +15,6 @@ public final class RegisterNewCityRulesValidatorImpl implements RegisterNewCityR
 	public RegisterNewCityRulesValidatorImpl(RegisterNewCityIdRulesValidator cityIdRulesValidator,
 			RegisterNewCityNameRulesValidator cityNameRulesValidator,
 			RegisterNewCityStateRulesValidator cityStateRulesValidator) {
-		super();
 		this.cityIdRulesValidator = cityIdRulesValidator;
 		this.cityNameRulesValidator = cityNameRulesValidator;
 		this.cityStateRulesValidator = cityStateRulesValidator;
@@ -25,6 +24,7 @@ public final class RegisterNewCityRulesValidatorImpl implements RegisterNewCityR
 	public void validate(final CityDomain data) {
 		cityIdRulesValidator.validate(data);
 		cityNameRulesValidator.validate(data);
+		cityStateRulesValidator.validate(data.getState().getId());
 	}
 
 }
