@@ -12,7 +12,7 @@ public class CityStateDoesNotExistsException extends RuleUcobetException {
 	}
 
 	public static final CityStateDoesNotExistsException create() {
-		var userMessage = "El estado asociado a la ciudad no existe.";
+		var userMessage = "El estado no existe.";
 		return new CityStateDoesNotExistsException(userMessage);
 	}
 

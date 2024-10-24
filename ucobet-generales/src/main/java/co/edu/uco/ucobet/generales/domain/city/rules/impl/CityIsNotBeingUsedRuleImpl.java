@@ -2,10 +2,13 @@ package co.edu.uco.ucobet.generales.domain.city.rules.impl;
 
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
+
 import co.edu.uco.ucobet.generales.apication.secondaryports.repository.CityRepository;
 import co.edu.uco.ucobet.generales.domain.city.exceptions.CityIsBeingUsedException;
 import co.edu.uco.ucobet.generales.domain.city.rules.CityIsNotBeingUsedRule;
 
+@Service
 public class CityIsNotBeingUsedRuleImpl implements CityIsNotBeingUsedRule{
 	
 	private CityRepository cityRepository;

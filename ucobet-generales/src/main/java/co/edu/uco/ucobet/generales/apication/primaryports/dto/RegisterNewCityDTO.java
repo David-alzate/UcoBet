@@ -32,7 +32,7 @@ public final class RegisterNewCityDTO {
 	}
 
 	private void setStateId(UUID stateId) {
-		stateId = UUIDHelper.getDefault(stateId, UUIDHelper.getDefault());
+		this.stateId = UUIDHelper.getDefault(stateId, UUIDHelper.getDefault());
 	}
 
 }

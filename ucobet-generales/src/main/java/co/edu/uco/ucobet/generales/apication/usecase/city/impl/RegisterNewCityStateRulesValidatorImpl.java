@@ -2,11 +2,14 @@ package co.edu.uco.ucobet.generales.apication.usecase.city.impl;
 
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
+
 import co.edu.uco.ucobet.generales.apication.usecase.city.RegisterNewCityStateRulesValidator;
 import co.edu.uco.ucobet.generales.domain.state.rules.StateDoesExistsRule;
 import co.edu.uco.ucobet.generales.domain.state.rules.StateIdIsNotDefaultValueRule;
 import co.edu.uco.ucobet.generales.domain.state.rules.StateIdIsNotNullRule;
 
+@Service
 public final class RegisterNewCityStateRulesValidatorImpl implements RegisterNewCityStateRulesValidator {
 
 	private StateDoesExistsRule stateDoesExistsRule;
@@ -22,14 +25,9 @@ public final class RegisterNewCityStateRulesValidatorImpl implements RegisterNew
 
 	@Override
 	public void validate(final UUID data) {
-		validateState(data);
-
-	}
-
-	private void validateState(final UUID data) {
+		stateIdIsNotDefaultValueRule.validate(data);
 		stateDoesExistsRule.validate(data);
 		stateIdIsNotNullRule.validate(data);
-		stateIdIsNotDefaultValueRule.validate(data);
 
 	}
 

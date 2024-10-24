@@ -30,7 +30,7 @@ public final class CountryEntity {
 		setName(name);
 	}
 
-	static final CountryEntity create() {
+	public static final CountryEntity create() {
 		return new CountryEntity();
 	}
 

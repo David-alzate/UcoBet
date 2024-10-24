@@ -1,17 +1,22 @@
 package co.edu.uco.ucobet.generales.init;
 
-import com.azure.security.keyvault.secrets.SecretClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import com.azure.security.keyvault.secrets.SecretClient;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"co.edu.uco.ucobet"})
+@EnableJpaRepositories("co.edu.uco.ucobet.generales.apication.secondaryports.repository")
+@EntityScan("co.edu.uco.ucobet.generales.apication.secondaryports.entity")
 public class UcobetGeneralesApplication implements CommandLineRunner {
 
     private final SecretClient secretClient;
-
+    
     public UcobetGeneralesApplication(SecretClient secretClient) {
         this.secretClient = secretClient;
     }

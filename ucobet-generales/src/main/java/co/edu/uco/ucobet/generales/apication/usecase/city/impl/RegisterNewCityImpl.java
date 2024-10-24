@@ -1,19 +1,22 @@
 package co.edu.uco.ucobet.generales.apication.usecase.city.impl;
 
+import org.springframework.stereotype.Service;
+
 import co.edu.uco.ucobet.generales.apication.secondaryports.entity.CityEntity;
+import co.edu.uco.ucobet.generales.apication.secondaryports.mapper.StateEntityMapper;
 import co.edu.uco.ucobet.generales.apication.secondaryports.repository.CityRepository;
 import co.edu.uco.ucobet.generales.apication.usecase.city.RegisterNewCity;
 import co.edu.uco.ucobet.generales.apication.usecase.city.RegisterNewCityRulesValidator;
 import co.edu.uco.ucobet.generales.domain.city.CityDomain;
 
+@Service
 public final class RegisterNewCityImpl implements RegisterNewCity {
 
 	private CityRepository cityRepository;
 	private RegisterNewCityRulesValidator registerNewCityRulesValidator;
-	
+
 	public RegisterNewCityImpl(CityRepository cityRepository,
 			RegisterNewCityRulesValidator registerNewCityRulesValidator) {
-		super();
 		this.cityRepository = cityRepository;
 		this.registerNewCityRulesValidator = registerNewCityRulesValidator;
 	}
@@ -21,14 +24,15 @@ public final class RegisterNewCityImpl implements RegisterNewCity {
 	@Override
 	public void execute(CityDomain domain) {
 
-		// Rules validation
-		registerNewCityRulesValidator.validate(domain);
+	    registerNewCityRulesValidator.validate(domain);
+	    
+	    var cityEntity = CityEntity.create()
+	            .setId(domain.getId())
+	            .setName(domain.getName())
+	            .setState(StateEntityMapper.INSTANCE.toEntity(domain.getState()));
 
-		// Data Mapper -> Domain -> Entity
-		final var cityEntity = CityEntity.create(null);
+	    cityRepository.save(cityEntity);
 
-		// Save CityEntity
-		cityRepository.save(cityEntity);
 		
 		// Notificar al administrador sobre la creacion de la nueva ciudad 
 		

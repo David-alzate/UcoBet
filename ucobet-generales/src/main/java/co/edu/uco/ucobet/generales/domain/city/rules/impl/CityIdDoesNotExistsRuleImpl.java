@@ -2,12 +2,15 @@ package co.edu.uco.ucobet.generales.domain.city.rules.impl;
 
 import java.util.UUID;
 
+import org.springframework.stereotype.Service;
+
 import co.edu.uco.ucobet.generales.apication.secondaryports.repository.CityRepository;
-import co.edu.uco.ucobet.generales.domain.city.exceptions.CityIdDoesNotExistsException;
+import co.edu.uco.ucobet.generales.domain.city.exceptions.CityIdDoesExistsException;
 import co.edu.uco.ucobet.generales.domain.city.rules.CityIdDoesNotExistsRule;
 
-public final class CityIdDoesNotExistsRuleImpl implements CityIdDoesNotExistsRule{
-	
+@Service
+public final class CityIdDoesNotExistsRuleImpl implements CityIdDoesNotExistsRule {
+
 	private CityRepository cityRepository;
 
 	public CityIdDoesNotExistsRuleImpl(final CityRepository cityRepository) {
@@ -16,11 +19,10 @@ public final class CityIdDoesNotExistsRuleImpl implements CityIdDoesNotExistsRul
 
 	@Override
 	public void validate(UUID data) {
-		if(cityRepository.existsById(data)) {
-			throw CityIdDoesNotExistsException.create();
+		if (cityRepository.existsById(data)) {
+			throw CityIdDoesExistsException.create();
 		}
-		
-		
+
 	}
 
 }
