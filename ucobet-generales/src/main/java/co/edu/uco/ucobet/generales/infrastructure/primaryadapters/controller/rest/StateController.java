@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.uco.ucobet.generales.apication.primaryports.dto.RetrieveStateDTO;
 import co.edu.uco.ucobet.generales.apication.primaryports.interactor.state.RetrieveStateInteractor;
 import co.edu.uco.ucobet.generales.crosscutting.exception.UcobetException;
-import co.edu.uco.ucobet.generales.infrastructure.primaryadapters.controller.response.StateResponse;
+import co.edu.uco.ucobet.generales.infrastructure.primaryadapters.controller.response.state.StateResponse;
 
 @RestController
 @RequestMapping("/general/api/v1/states")
-public class RetrieveStateController {
+public class StateController {
 	
 	private RetrieveStateInteractor retrieveStateInteractor;
 
-	public RetrieveStateController(RetrieveStateInteractor retrieveStateInteractor) {
+	public StateController(RetrieveStateInteractor retrieveStateInteractor) {
 		this.retrieveStateInteractor = retrieveStateInteractor;
 	}
 	
