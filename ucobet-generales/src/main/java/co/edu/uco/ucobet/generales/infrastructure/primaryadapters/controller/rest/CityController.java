@@ -39,7 +39,7 @@ public class CityController {
 			ciudadResponse.getMensajes().add(excepcion.getUserMessage());
 		} catch (final Exception excepcion) {
 			httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-			var mensajeUsuario = "Se ha presentado un problema tratando de registrar la nueva ciudad";
+			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00006);
 			ciudadResponse.getMensajes().add(mensajeUsuario);
 		}
 

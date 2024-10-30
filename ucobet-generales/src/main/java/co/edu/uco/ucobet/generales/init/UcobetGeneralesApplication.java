@@ -28,8 +28,8 @@ public class UcobetGeneralesApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
         // Recupera el secreto desde Azure Key Vault y establece la URL de la base de datos
-        String h2url = secretClient.getSecret("spring-datasource-url").getValue();
-        System.setProperty("spring.datasource.url", h2url);
+        String h2url = secretClient.getSecret("passwordPostgrest").getValue();
+        System.setProperty("passwordPostgrest", h2url);
         System.out.println("h2url: " + h2url);
     }
 }

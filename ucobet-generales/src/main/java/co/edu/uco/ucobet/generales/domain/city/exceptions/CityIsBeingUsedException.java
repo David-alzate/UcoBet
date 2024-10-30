@@ -1,6 +1,8 @@
 package co.edu.uco.ucobet.generales.domain.city.exceptions;
 
 import co.edu.uco.ucobet.generales.crosscutting.exception.RuleUcobetException;
+import co.edu.uco.ucobet.generales.crosscutting.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.ucobet.generales.crosscutting.messagecatalog.data.CodigoMensaje;
 
 public class CityIsBeingUsedException extends RuleUcobetException{
 
@@ -12,7 +14,7 @@ public class CityIsBeingUsedException extends RuleUcobetException{
 	}
 	
 	public static final CityIsBeingUsedException create() {
-		var userMessage = "La ciudad esta siendo utilizada en otra parte del sistema";
+		var userMessage = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M000014);
 		return new CityIsBeingUsedException(userMessage);
 	}
 

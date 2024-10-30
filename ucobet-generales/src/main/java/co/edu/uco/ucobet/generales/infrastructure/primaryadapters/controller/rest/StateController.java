@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.uco.ucobet.generales.apication.primaryports.dto.RetrieveStateDTO;
 import co.edu.uco.ucobet.generales.apication.primaryports.interactor.state.RetrieveStateInteractor;
 import co.edu.uco.ucobet.generales.crosscutting.exception.UcobetException;
+import co.edu.uco.ucobet.generales.crosscutting.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.ucobet.generales.crosscutting.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.ucobet.generales.infrastructure.primaryadapters.controller.response.state.StateResponse;
 
 @RestController
@@ -29,7 +31,7 @@ public class StateController {
         try {
         	var stateDTO = RetrieveStateDTO.create();
         	stateResponse.setDatos(retrieveStateInteractor.execute(stateDTO));
-            stateResponse.getMensajes().add("Estados consultados exitosamente");
+            stateResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00007));
 
         } catch (final UcobetException excepcion) {
             httpStatusCode = HttpStatus.BAD_REQUEST;
@@ -37,7 +39,7 @@ public class StateController {
             excepcion.printStackTrace();
         } catch (final Exception excepcion) {
             httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-            var mensajeUsuario = "Se ha presentado un problema tratando de consultar los estados";
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00008);
             stateResponse.getMensajes().add(mensajeUsuario);
             excepcion.printStackTrace();
         }

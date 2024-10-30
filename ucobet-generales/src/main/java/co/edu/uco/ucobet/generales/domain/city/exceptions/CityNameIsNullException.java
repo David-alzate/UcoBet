@@ -1,6 +1,8 @@
 package co.edu.uco.ucobet.generales.domain.city.exceptions;
 
 import co.edu.uco.ucobet.generales.crosscutting.exception.RuleUcobetException;
+import co.edu.uco.ucobet.generales.crosscutting.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.ucobet.generales.crosscutting.messagecatalog.data.CodigoMensaje;
 
 public class CityNameIsNullException extends RuleUcobetException {
 
@@ -12,7 +14,7 @@ public class CityNameIsNullException extends RuleUcobetException {
 	}
 	
 	public static final CityNameIsNullException create() {
-		var userMessage = "El nombre de la ciudad no puede ser nulo";
+		var userMessage = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M000018);
 		return new CityNameIsNullException(userMessage);
 	}
 

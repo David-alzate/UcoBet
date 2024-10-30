@@ -1,6 +1,8 @@
 package co.edu.uco.ucobet.generales.domain.city.exceptions;
 
 import co.edu.uco.ucobet.generales.crosscutting.exception.RuleUcobetException;
+import co.edu.uco.ucobet.generales.crosscutting.messagecatalog.MessageCatalogStrategy;
+import co.edu.uco.ucobet.generales.crosscutting.messagecatalog.data.CodigoMensaje;
 
 public class CityStateDoesNotExistsException extends RuleUcobetException {
 
@@ -12,7 +14,7 @@ public class CityStateDoesNotExistsException extends RuleUcobetException {
 	}
 
 	public static final CityStateDoesNotExistsException create() {
-		var userMessage = "El estado no existe.";
+		var userMessage = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M000020);
 		return new CityStateDoesNotExistsException(userMessage);
 	}
 
