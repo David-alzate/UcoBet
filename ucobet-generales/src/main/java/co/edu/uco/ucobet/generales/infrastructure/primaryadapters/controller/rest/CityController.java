@@ -2,6 +2,7 @@ package co.edu.uco.ucobet.generales.infrastructure.primaryadapters.controller.re
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,32 +19,31 @@ import co.edu.uco.ucobet.generales.infrastructure.primaryadapters.controller.res
 @RequestMapping("/general/api/v1/cities")
 public class CityController {
 
-	private RegisterNewCityInteractor registerNewCityInteractor;
+    private RegisterNewCityInteractor registerNewCityInteractor;
 
-	public CityController(RegisterNewCityInteractor registerNewCityInteractor) {
-		super();
-		this.registerNewCityInteractor = registerNewCityInteractor;
-	}
+    public CityController(RegisterNewCityInteractor registerNewCityInteractor) {
+        super();
+        this.registerNewCityInteractor = registerNewCityInteractor;
+    }
 
-	@PostMapping
-	public ResponseEntity<CityResponse> registrarCiudad(@RequestBody RegisterNewCityDTO dto) {
-		var httpStatusCode = HttpStatus.CREATED;
-		var ciudadResponse = new CityResponse();
+    @PostMapping
+    public ResponseEntity<CityResponse> registrarCiudad(@Validated @RequestBody RegisterNewCityDTO dto) {
+        var httpStatusCode = HttpStatus.CREATED;
+        var ciudadResponse = new CityResponse();
 
-		try {
-			registerNewCityInteractor.execute(dto);
-			ciudadResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00005));
+        try {
+            registerNewCityInteractor.execute(dto);
+            ciudadResponse.getMensajes().add(MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00005));
 
-		} catch (final RuleUcobetException excepcion) {
-			httpStatusCode = HttpStatus.BAD_REQUEST;
-			ciudadResponse.getMensajes().add(excepcion.getUserMessage());
-		} catch (final Exception excepcion) {
-			httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-			var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00006);
-			ciudadResponse.getMensajes().add(mensajeUsuario);
-		}
+        } catch (final RuleUcobetException excepcion) {
+            httpStatusCode = HttpStatus.BAD_REQUEST;
+            ciudadResponse.getMensajes().add(excepcion.getUserMessage());
+        } catch (final Exception excepcion) {
+            httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+            var mensajeUsuario = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00006);
+            ciudadResponse.getMensajes().add(mensajeUsuario);
+        }
 
-		return new ResponseEntity<>(ciudadResponse, httpStatusCode);
-	}
-
+        return new ResponseEntity<>(ciudadResponse, httpStatusCode);
+    }
 }
