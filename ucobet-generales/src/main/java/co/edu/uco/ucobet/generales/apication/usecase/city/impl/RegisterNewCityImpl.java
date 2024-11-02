@@ -9,8 +9,6 @@ import co.edu.uco.ucobet.generales.apication.usecase.city.RegisterNewCity;
 import co.edu.uco.ucobet.generales.apication.usecase.city.RegisterNewCityRulesValidator;
 import co.edu.uco.ucobet.generales.crosscutting.exception.UseCaseUcobetException;
 import co.edu.uco.ucobet.generales.crosscutting.helpers.ObjectHelper;
-import co.edu.uco.ucobet.generales.crosscutting.messagecatalog.MessageCatalogStrategy;
-import co.edu.uco.ucobet.generales.crosscutting.messagecatalog.data.CodigoMensaje;
 import co.edu.uco.ucobet.generales.domain.city.CityDomain;
 
 @Service
@@ -22,8 +20,8 @@ public final class RegisterNewCityImpl implements RegisterNewCity {
 	public RegisterNewCityImpl(CityRepository cityRepository,
 			RegisterNewCityRulesValidator registerNewCityRulesValidator) {
 		if (ObjectHelper.isNull(cityRepository) || ObjectHelper.isNull(registerNewCityRulesValidator)) {
-			var userMessage = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M00006);
-			var technicalMessage = MessageCatalogStrategy.getContenidoMensaje(CodigoMensaje.M000010);
+			var userMessage = "Se ha presentado un problema tratando de registrar la nueva ciudad";
+			var technicalMessage = "El repository o las rules para Registrar el cliente llegó nulo...";
 			throw new UseCaseUcobetException(userMessage, technicalMessage, new Exception());
 		}
 
