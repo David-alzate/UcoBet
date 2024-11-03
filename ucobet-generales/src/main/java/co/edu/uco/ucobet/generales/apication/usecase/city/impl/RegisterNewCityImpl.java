@@ -1,5 +1,7 @@
 package co.edu.uco.ucobet.generales.apication.usecase.city.impl;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Service;
 
 import co.edu.uco.ucobet.generales.apication.secondaryports.entity.CityEntity;
@@ -10,15 +12,17 @@ import co.edu.uco.ucobet.generales.apication.usecase.city.RegisterNewCityRulesVa
 import co.edu.uco.ucobet.generales.crosscutting.exception.UseCaseUcobetException;
 import co.edu.uco.ucobet.generales.crosscutting.helpers.ObjectHelper;
 import co.edu.uco.ucobet.generales.domain.city.CityDomain;
+import co.edu.uco.ucobet.generales.infrastructure.secondaryadapters.notificationservice.NotificationService;
 
 @Service
 public final class RegisterNewCityImpl implements RegisterNewCity {
 
 	private CityRepository cityRepository;
 	private RegisterNewCityRulesValidator registerNewCityRulesValidator;
+	private NotificationService notificationService;
 
 	public RegisterNewCityImpl(CityRepository cityRepository,
-			RegisterNewCityRulesValidator registerNewCityRulesValidator) {
+			RegisterNewCityRulesValidator registerNewCityRulesValidator, NotificationService notificationService) {
 		if (ObjectHelper.isNull(cityRepository) || ObjectHelper.isNull(registerNewCityRulesValidator)) {
 			var userMessage = "Se ha presentado un problema tratando de registrar la nueva ciudad";
 			var technicalMessage = "El repository o las rules para Registrar el cliente llegó nulo...";
@@ -27,6 +31,7 @@ public final class RegisterNewCityImpl implements RegisterNewCity {
 
 		this.cityRepository = cityRepository;
 		this.registerNewCityRulesValidator = registerNewCityRulesValidator;
+		this.notificationService = notificationService;
 	}
 
 	@Override
@@ -39,12 +44,11 @@ public final class RegisterNewCityImpl implements RegisterNewCity {
 
 		cityRepository.save(cityEntity);
 
-		// Notificar al administrador sobre la creacion de la nueva ciudad
-
-		// 1. El correo del administrador esta en un lugar parametrizado (Parametres
-		// Building Block)
-		// 2. El asunto del correo esta en un lugar parametrizado
-		// 3: El cuerpo del correo esta en un lugar parametrizado
+		try {
+			notificationService.sendNotification("Alzatedavid0126@gmail.com", "UcoBet", "Se ha registrado una nueva ciudad con nombre " + domain.getName());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 
