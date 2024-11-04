@@ -27,7 +27,7 @@ public class RedisMessageCatalog implements MessageCatalog {
 
 	public String generateNextMessageCode() {
 		Long counter = redisTemplate.opsForValue().increment(MESSAGE_COUNTER_KEY);
-		return String.format("M%05d", counter); // Formato M00001, M00002, etc.
+		return String.format("M%05d", counter);
 	}
 
 }

@@ -45,7 +45,7 @@ public final class RegisterNewCityImpl implements RegisterNewCity {
 		cityRepository.save(cityEntity);
 
 		try {
-			notificationService.sendNotification("Alzatedavid0126@gmail.com", "UcoBet", "Se ha registrado una nueva ciudad con nombre " + domain.getName());
+			notificationService.sendNotification("Lauraagudelomarulanda1@gmail.com", "UcoBet", "Se ha registrado una nueva ciudad con nombre " + domain.getName());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
