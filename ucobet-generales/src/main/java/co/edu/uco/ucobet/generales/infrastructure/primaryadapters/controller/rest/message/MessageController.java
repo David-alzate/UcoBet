@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,16 @@ public class MessageController {
 		}
 
 		return ResponseEntity.ok(formattedMessages);
+	}
+	
+	@PutMapping("/update/{code}")
+	public ResponseEntity<String> updateMessage(@PathVariable String code, @RequestParam String newContent) {
+	    boolean updated = messageHelper.updateMessage(code, newContent);
+	    if (updated) {
+	        return ResponseEntity.ok("Mensaje actualizado con código: " + code);
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mensaje no encontrado para el código: " + code);
+	    }
 	}
 
 	@DeleteMapping("/{code}")

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import co.edu.uco.ucobet.generales.apication.primaryports.dto.RegisterNewCityDTO;
 import co.edu.uco.ucobet.generales.infrastructure.primaryadapters.controller.response.Response;
 
-public class CityResponse extends Response<RegisterNewCityDTO>{
+public class RegisterNewCityResponse extends Response<RegisterNewCityDTO>{
 	
-	public CityResponse() {
+	public RegisterNewCityResponse() {
         setMensajes(new ArrayList<>());
         setDatos(new ArrayList<>());
     }

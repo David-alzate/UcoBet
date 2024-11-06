@@ -38,4 +38,12 @@ public class MessageHelper {
 	public boolean deleteMessage(String code) {
 		return redisTemplate.opsForHash().delete(MESSAGE, code) != null;
 	}
+	
+	public boolean updateMessage(String code, String newContent) {
+	    if (redisTemplate.opsForHash().hasKey(MESSAGE, code)) {
+	        redisTemplate.opsForHash().put(MESSAGE, code, newContent);
+	        return true;
+	    }
+	    return false;
+	}
 }
