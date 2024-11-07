@@ -1,4 +1,4 @@
-package co.edu.uco.ucobet.generales.infrastructure.primaryadapters.controller;
+package co.edu.uco.ucobet.generales.infrastructure.primaryadapters.controller.rest;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
