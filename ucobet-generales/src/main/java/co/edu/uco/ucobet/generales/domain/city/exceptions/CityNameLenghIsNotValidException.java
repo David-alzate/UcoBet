@@ -1,6 +1,7 @@
 package co.edu.uco.ucobet.generales.domain.city.exceptions;
 
 import co.edu.uco.ucobet.generales.crosscutting.exception.RuleUcobetException;
+import co.edu.uco.ucobet.generales.crosscutting.helpers.MessageHelper;
 
 public class CityNameLenghIsNotValidException extends RuleUcobetException{
 
@@ -12,7 +13,7 @@ public class CityNameLenghIsNotValidException extends RuleUcobetException{
 	}
 	
 	public static final CityNameLenghIsNotValidException create() {
-		var userMessage = "El tamaño para el nombre de la ciudad no es valido";
+		var userMessage = MessageHelper.getInstance().getMessage("M00023");
 		return new CityNameLenghIsNotValidException(userMessage);
 	}
 

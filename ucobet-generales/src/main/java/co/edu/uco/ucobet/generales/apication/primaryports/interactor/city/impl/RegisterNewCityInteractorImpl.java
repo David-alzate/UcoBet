@@ -9,15 +9,18 @@ import co.edu.uco.ucobet.generales.apication.primaryports.mapper.RegisterNewCity
 import co.edu.uco.ucobet.generales.apication.usecase.city.RegisterNewCity;
 import co.edu.uco.ucobet.generales.crosscutting.exception.InteractorUcobetException;
 import co.edu.uco.ucobet.generales.crosscutting.exception.UcobetException;
+import co.edu.uco.ucobet.generales.crosscutting.helpers.MessageHelper;
 
 @Service
 @Transactional
 public class RegisterNewCityInteractorImpl implements RegisterNewCityInteractor {
 
 	private RegisterNewCity registerNewCity;
+	private final MessageHelper messageHelper;
 
-	public RegisterNewCityInteractorImpl(RegisterNewCity registerNewCity) {
+	public RegisterNewCityInteractorImpl(RegisterNewCity registerNewCity, MessageHelper messageHelper) {
 		this.registerNewCity = registerNewCity;
+		this.messageHelper = messageHelper;
 	}
 
 	@Override
@@ -29,8 +32,8 @@ public class RegisterNewCityInteractorImpl implements RegisterNewCityInteractor 
 		} catch (UcobetException exception) {
 			throw exception;
 		} catch (Exception exception) {
-			var userMessage = "Se ha presentado un problema tratando de registrar la nueva ciudad";
-			var technicalMessage = "Se ha presentado un problema INESPERADO tratando de Registrar la información de la ciudad.";
+			var userMessage = messageHelper.getMessage("M00006");
+			var technicalMessage = messageHelper.getMessage("M00011");
 
 			throw new InteractorUcobetException(userMessage, technicalMessage, exception);
 

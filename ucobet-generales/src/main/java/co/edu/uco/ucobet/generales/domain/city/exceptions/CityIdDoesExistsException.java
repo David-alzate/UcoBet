@@ -1,6 +1,7 @@
 package co.edu.uco.ucobet.generales.domain.city.exceptions;
 
 import co.edu.uco.ucobet.generales.crosscutting.exception.RuleUcobetException;
+import co.edu.uco.ucobet.generales.crosscutting.helpers.MessageHelper;
 
 public class CityIdDoesExistsException extends RuleUcobetException {
 
@@ -12,7 +13,7 @@ public class CityIdDoesExistsException extends RuleUcobetException {
 	}
 
 	public static final CityIdDoesExistsException create() {
-		var userMessage = "Ya existe una ciudad con este id";
+		var userMessage = MessageHelper.getInstance().getMessage("M00015");
 		return new CityIdDoesExistsException(userMessage);
 	}
 

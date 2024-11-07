@@ -53,7 +53,7 @@ public class CityController {
 	    } catch (final RuleUcobetException excepcion) {
 	        httpStatusCode = HttpStatus.BAD_REQUEST;
 	        ciudadResponse.getMensajes().add(excepcion.getUserMessage());
-	        logger.error("Excepción capturada: {}", excepcion.getMessage(), excepcion);
+	        logger.error(excepcion.getMessage(), excepcion);
 
 	    } catch (final Exception excepcion) {
 	        httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -72,17 +72,15 @@ public class CityController {
         try {
         	var cityDTO = RetrieveCityDTO.create();
         	cityResponse.setDatos(retrieveCityInteractor.execute(cityDTO));
-        	cityResponse.getMensajes().add("Ciudades consultados exitosamente");
+        	cityResponse.getMensajes().add(messageHelper.getMessage("M00009"));
 
         } catch (final UcobetException excepcion) {
             httpStatusCode = HttpStatus.BAD_REQUEST;
             cityResponse.getMensajes().add(excepcion.getUserMessage());
-            excepcion.printStackTrace();
         } catch (final Exception excepcion) {
             httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-            var mensajeUsuario = "Se ha presentado un problema tratando de consultar las ciudades";
+            var mensajeUsuario = messageHelper.getMessage("M00010");
             cityResponse.getMensajes().add(mensajeUsuario);
-            excepcion.printStackTrace();
         }
 
         return new ResponseEntity<>(cityResponse, httpStatusCode);

@@ -5,13 +5,19 @@ import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 
+import ch.qos.logback.classic.Logger;
+
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+
 import co.edu.uco.ucobet.generales.crosscutting.exception.NotificationServiceException;
 
 @Service
 public class NotificationService {
+	
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(NotificationService.class);
 
     private final SendGrid sendGrid;
 
@@ -36,7 +42,7 @@ public class NotificationService {
                     "Código de respuesta: " + response.getStatusCode(), 
                     new IOException("Código de respuesta: " + response.getStatusCode()));
             }
-            System.out.println("Email sent! Status code: " + response.getStatusCode());
+            logger.info("Email sent! Status code: {}", response.getStatusCode());
         } catch (IOException ex) {
             throw NotificationServiceException.create("Fallo al intentar enviar la notificación", ex.getMessage(), ex);
         }

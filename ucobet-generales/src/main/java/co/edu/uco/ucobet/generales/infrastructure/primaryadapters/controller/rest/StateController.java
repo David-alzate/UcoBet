@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.uco.ucobet.generales.apication.primaryports.dto.RetrieveStateDTO;
 import co.edu.uco.ucobet.generales.apication.primaryports.interactor.state.RetrieveStateInteractor;
 import co.edu.uco.ucobet.generales.crosscutting.exception.UcobetException;
+import co.edu.uco.ucobet.generales.crosscutting.helpers.MessageHelper;
 import co.edu.uco.ucobet.generales.infrastructure.primaryadapters.controller.response.state.StateResponse;
 
 @RestController
@@ -16,9 +17,11 @@ import co.edu.uco.ucobet.generales.infrastructure.primaryadapters.controller.res
 public class StateController {
 	
 	private RetrieveStateInteractor retrieveStateInteractor;
+	private final MessageHelper messageHelper;
 
-	public StateController(RetrieveStateInteractor retrieveStateInteractor) {
+	public StateController(RetrieveStateInteractor retrieveStateInteractor, MessageHelper messageHelper) {
 		this.retrieveStateInteractor = retrieveStateInteractor;
+		this.messageHelper = messageHelper;
 	}
 	
     @GetMapping
@@ -29,17 +32,15 @@ public class StateController {
         try {
         	var stateDTO = RetrieveStateDTO.create();
         	stateResponse.setDatos(retrieveStateInteractor.execute(stateDTO));
-            stateResponse.getMensajes().add("Estados consultados exitosamente");
+            stateResponse.getMensajes().add(messageHelper.getMessage("M00007"));
 
         } catch (final UcobetException excepcion) {
             httpStatusCode = HttpStatus.BAD_REQUEST;
             stateResponse.getMensajes().add(excepcion.getUserMessage());
-            excepcion.printStackTrace();
         } catch (final Exception excepcion) {
             httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-            var mensajeUsuario = "Se ha presentado un problema tratando de consultar los estados";
+            var mensajeUsuario = messageHelper.getMessage("M00014");
             stateResponse.getMensajes().add(mensajeUsuario);
-            excepcion.printStackTrace();
         }
 
         return new ResponseEntity<>(stateResponse, httpStatusCode);
