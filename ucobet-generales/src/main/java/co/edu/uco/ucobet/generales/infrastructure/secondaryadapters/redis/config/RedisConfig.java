@@ -1,4 +1,4 @@
-package co.edu.uco.ucobet.generales.infrastructure.secondaryadapters.redis;
+package co.edu.uco.ucobet.generales.infrastructure.secondaryadapters.redis.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

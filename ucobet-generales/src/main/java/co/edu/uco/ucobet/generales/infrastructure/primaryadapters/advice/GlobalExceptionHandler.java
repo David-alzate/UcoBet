@@ -1,4 +1,4 @@
-package co.edu.uco.ucobet.generales.init;
+package co.edu.uco.ucobet.generales.infrastructure.primaryadapters.advice;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(RuleUcobetException.class)
 	public ResponseEntity<String> handleRuleUcobetException(RuleUcobetException ex) {
 		logger.error("Rule error: ", ex);
-		String userMessage = ex.getUserMessage(); // Mensaje para el usuario
+		String userMessage = ex.getUserMessage();
 		return new ResponseEntity<>(userMessage, HttpStatus.BAD_REQUEST);
 	}
 }

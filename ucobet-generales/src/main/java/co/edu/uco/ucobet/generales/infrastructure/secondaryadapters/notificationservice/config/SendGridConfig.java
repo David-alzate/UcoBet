@@ -1,4 +1,4 @@
-package co.edu.uco.ucobet.generales.init;
+package co.edu.uco.ucobet.generales.infrastructure.secondaryadapters.notificationservice.config;
 
 import com.sendgrid.SendGrid;
 import org.springframework.beans.factory.annotation.Value;
